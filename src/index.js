@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {PORT}=require('./config/serverconfig');  
+const CityRepository=require('./repository/city-repository');
+
 const setupandstartserver=async ()=>
 {
 // Initializing the app
@@ -14,7 +16,8 @@ app.use(bodyParser.json());
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-    
+    const repo=new CityRepository();
+    repo.createCity({name:"new delhi"});
 });
 }
 setupandstartserver();
