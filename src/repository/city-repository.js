@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { City } = require('../models/index');
 
 class CityRepository {
@@ -18,6 +19,37 @@ class CityRepository {
       throw error;
     }
   }
+
+async updateCity(cityId,data)
+{
+  try{
+const city=await City.update(data,{
+  where:{
+    id:cityId
+  }
+}
+);
+return city;
+  }
+
+  catch(error)
+  {
+    console.log("somethin wrong in repository");
+    throw(eroor);
+  }
 }
 
+async getCity(cityId)
+{
+  try{
+const city=await City.findbyPk(cityId);
+return city;
+  }
+  catch(error)
+  {
+    console.log("something wrong in repo layer");
+    throw(error);
+  }
+}
+}
 module.exports = CityRepository;
