@@ -51,10 +51,10 @@ throw(error);
             throw(error);
         }
     }
-async getAllCities()
+async getAllCities(filter)
 {
 try{
-    const cities=await this.cityrepo.getAllCities();
+    const cities=await this.cityrepo.getAllCities({name:filter.name});
     return cities;
 }
 catch(error)

@@ -38,7 +38,7 @@ const ApiRoutes = require('./routes/index');
 const db = require('./models/index');
 // const {Airplane} = require('./models/index');
 
-const setupAndStartServer = async () => {
+const setupAndStartServer = async () => { // async added so that if there is an async task like data association 
 
     // create the express object
     const app = express();
