@@ -1,27 +1,24 @@
 const {CityRepository}=require('../repository/index.js')
 class CityService
 
-{
-    constructor()
+{    constructor()
     {
         this.cityrepo=new CityRepository();
     }
-    async createcity(data)
-    {
-        try{
-            const response=await this.cityrepo.createcity(data);
-            return city;
-        }
-        catch(error)
-        {
-            console.log("something wrong in service layer");
-      throw(error);      
+    async createCity(data) {
+        try {
+            if (!data.name) throw new Error("City name is required"); // Check for name
+            const response = await this.cityrepo.createCity({ name: data.name }); // Pass { name } explicitly
+            return response;
+        } catch (error) {
+            console.log("Something went wrong in the service layer");
+            throw error;
         }
     }
-    async deletecity(data)
+    async deleteCity(data)
     {
         try{
-            const response=await this.cityrepo.deletecity(data);
+            const response=await this.cityrepo.deleteCity(data);
             return response;
         }
         catch(error)
@@ -30,10 +27,10 @@ class CityService
             throw(error);
         }
     }
-    async updatecity(cityId,data)
+    async updateCity(cityId,data)
     {
         try{
-            const response=await this.cityrepo.deletecity(cityId);
+            const response=await this.cityrepo.updateCity(cityId,data);
             return response;
         }
         catch(error)
@@ -42,10 +39,10 @@ class CityService
 throw(error);
         } 
     }
-    async getcity(cityId)
+    async getCity(cityId)
     {
         try{
-            const response=await this.cityrepo.getcity(cityId);
+            const response=await this.cityrepo.getCity(cityId);
             return response;
         }
         catch(error)
@@ -54,4 +51,17 @@ throw(error);
             throw(error);
         }
     }
+async getAllCities()
+{
+try{
+    const cities=await this.cityrepo.getAllCities();
+    return cities;
 }
+catch(error)
+{
+    console.log("something wrong in service layer");
+    throw(error);
+}
+}
+}
+module.exports = CityService;
